@@ -1,13 +1,13 @@
 #!/bin/bash
 read -p "ID: " id
 curl -s -o o17.html https://zsem.edu.pl/plany/plany/$id.html
-grep -E '&nbsp|class="g"|class="p"|<ti' o17.html | 
+grep -E '&nbsp|class="g"|class="p"' o17.html | 
 sed "
-s/.*p\">//g;
+s/.*p\">/|/g;
 s/<\/.*s\">/ /g;
-s/<\/a*.*//g;
+s/<\/a*.*/|/g;
 s/.*g\">//g;
-s/.*&nbsp;/-/g;
-s/<title>//
+s/.*&nbsp;/|-/g;
 " > ~/.cache/o17
-sed ':a;N;$!ba;s/\n/ /g ; s/..:..-..:../\n&\t/g' ~/.cache/o17
+sed ':a;N;$!ba;s/\n/\t/g ; s/..:..-..:../\n& /g' ~/.cache/o17 |
+column -t -s "|"
