@@ -1,3 +1,5 @@
-#!/bin/sh
-curl -o o17.html https://zsem.edu.pl/plany/plany/o17.html &&
-grep -E '&nbsp|class="g"|class="p"' o17.html | sed "s/.*p\">//g ; s/<\/.*s\">/ /g ; s/<\/a*.*//g ; s/.*g\">//g ; s/.*&nbsp;/-/g"
+#!/bin/bash
+read -p "ID: " id
+curl -s -o o17.html https://zsem.edu.pl/plany/plany/$id.html
+grep -E '&nbsp|class="g"|class="p"|<ti' o17.html | sed "s/.*p\">//g ; s/<\/.*s\">/ /g ; s/<\/a*.*//g ; s/.*g\">//g ; s/.*&nbsp;/-/g ; s/<title>//" > ~/.cache/o17
+sed ':a;N;$!ba;s/\n/ /g ; s/..:..-..:../\n&\t/g' ~/.cache/o17
