@@ -1,7 +1,7 @@
 #!/bin/bash
-read -p "ID: " id
-curl -s -o o17.html https://zsem.edu.pl/plany/plany/$id.html
-grep -E '&nbsp|class="g"|class="p"|<th' o17.html | 
+#read -p "ID: " id
+#curl -s -o o17.html https://zsem.edu.pl/plany/plany/$id.html
+grep -E '&nbsp|class="g"|class="p"|<th|CKZ' o17.html | 
 sed "
 s/.*p\">/|/g;
 s/<\/.*s\">/ /g;
@@ -10,7 +10,9 @@ s/.*g\">//g;
 s/.*&nbsp;/|-/g;
 s/<th>/|/g;
 s/|Nr|//g;
-0,/ *|/{s/ *|//}
+s/<td.*>/|/g;
+0,/ *|/{s/ *|//};
+1d
 " > ~/.cache/o17
 sed ':a;N;$!ba;s/\n/\t/g ; s/..:..-..:../\n& /g' ~/.cache/o17 |
 column -t -s "|"
@@ -18,4 +20,3 @@ rm ~/.cache/o17
 
 # ok prawie dziala ale nie pokazuje niemieckiego, dwoch matm i historii w piatek, z jakiegos powodu XD
 # plus wyswietla tylko druga grupe
-# no i naglowki kolumn sa przesuniete o ilestam spacji
