@@ -18,5 +18,4 @@ sed ':a;N;$!ba;s/\n/\t/g ; s/..:..-..:../\n& /g' ~/.cache/o17 |
 column -t -s "|"
 rm ~/.cache/o17
 
-# ok prawie dziala ale nie pokazuje niemieckiego, dwoch matm i historii w piatek, z jakiegos powodu XD
-# plus wyswietla tylko druga grupe
+# wyswietla tylko ostatnie grupy
